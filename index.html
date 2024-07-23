@@ -1,20 +1,22 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./style.css">
     <title>Agendamento de Horários</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-
 </head>
-
 <body>
-
     <div class="container">
         <h1>Agendamento de Serviços</h1>
         <form id="bookingForm">
+            <label for="client">Cliente:</label>
+            <select id="client" name="client" required>
+                <option value="">Selecione um cliente</option>
+                <!-- Lista de clientes será preenchida aqui -->
+            </select>
+
             <label for="name">Nome:</label>
             <input type="text" id="name" name="name" placeholder="Digite o Nome" required>
 
@@ -32,6 +34,9 @@
 
             <label for="duration">Duração (minutos):</label>
             <select id="duration" name="duration" required>
+                <option value="20">20 minutos</option>
+                <option value="30">30 minutos</option>
+                <option value="40">40 minutos</option>
                 <option value="60">60 minutos</option>
                 <option value="90">90 minutos</option>
                 <option value="120">120 minutos</option>
@@ -46,6 +51,21 @@
             <div id="errorMessage" class="error"></div>
             <button type="submit">Agendar</button>
         </form>
+
+        <h2>Adicionar Novo Cliente</h2>
+        <form id="addClientForm">
+            <label for="newName">Nome:</label>
+            <input type="text" id="newName" name="newName" placeholder="Digite o Nome" required>
+
+            <label for="newEmail">Email:</label>
+            <input type="email" id="newEmail" name="newEmail" placeholder="Digite o email" required>
+
+            <label for="newPhone">Telefone (WhatsApp):</label>
+            <input type="tel" id="newPhone" name="newPhone" placeholder="Digite o numero de Telefone" required>
+
+            <button type="button" id="addClientButton">Adicionar Cliente</button>
+        </form>
+
         <div id="horariosDisponiveis">
             <h2>Horários Disponíveis e Ocupados</h2>
             <ul id="listaHorarios"></ul>
@@ -57,5 +77,4 @@
     </div>
 </body>
 <script src="./script.js"></script>
-
 </html>

@@ -104,31 +104,95 @@ function addMinutes(time, minutes) {
     const newMinute = newMinutes % 60;
     return `${newHour.toString().padStart(2, '0')}:${newMinute.toString().padStart(2, '0')}`;
 }
+document.addEventListener('DOMContentLoaded', function () {
+    const clientes = {
+        cliente1: { name: 'Cliente 1', email: 'cliente1@example.com', phone: '123456789' },
+        cliente2: { name: 'Cliente 2', email: 'cliente2@example.com', phone: '987654321' },
+        cliente3: { name: 'Cliente 3', email: 'cliente3@example.com', phone: '111222333' }
+    };
+
+    const clientSelect = document.getElementById('client');
+    const nameInput = document.getElementById('name');
+    const emailInput = document.getElementById('email');
+    const phoneInput = document.getElementById('phone');
+
+    // Função para atualizar os campos de nome, email e telefone
+    function updateClientDetails() {
+        const selectedClient = clientSelect.value;
+        if (clientes[selectedClient]) {
+            nameInput.value = clientes[selectedClient].name;
+            emailInput.value = clientes[selectedClient].email;
+            phoneInput.value = clientes[selectedClient].phone;
+        } else {
+            nameInput.value = '';
+            emailInput.value = '';
+            phoneInput.value = '';
+        }
+    }
+
+    // Adiciona o evento de mudança no select de cliente
+    clientSelect.addEventListener('change', updateClientDetails);
+
+    // Preenche o select com os clientes
+    function populateClientSelect() {
+        clientSelect.innerHTML = '<option value="">Selecione um cliente</option>';
+        for (let key in clientes) {
+            const option = document.createElement('option');
+            option.value = key;
+            option.textContent = clientes[key].name;
+            clientSelect.appendChild(option);
+        }
+    }
+
+    // Função para adicionar um novo cliente
+    function addNewClient() {
+        const newName = document.getElementById('newName').value;
+        const newEmail = document.getElementById('newEmail').value;
+        const newPhone = document.getElementById('newPhone').value;
+
+        if (newName && newEmail && newPhone) {
+            const newKey = 'cliente' + (Object.keys(clientes).length + 1);
+            clientes[newKey] = { name: newName, email: newEmail, phone: newPhone };
+            populateClientSelect();
+            alert('Cliente adicionado com sucesso!');
+            document.getElementById('addClientForm').reset();
+        } else {
+            alert('Por favor, preencha todos os campos do novo cliente.');
+        }
+    }
+
+    // Adiciona o evento de clique no botão de adicionar cliente
+    document.getElementById('addClientButton').addEventListener('click', addNewClient);
+
+    // Inicializa a lista de clientes no select
+    populateClientSelect();
+});
+
 
 async function enviarMensagemWhatsApp(phone, name, date, time, service) {
     // Aquí debes implementar la lógica para enviar el mensaje de WhatsApp
 
 
-const twilio = require('twilio');
+    const twilio = require('twilio');
 
-const accountSid = 'EUA4ff172c85327c502f00fb3fc69fcc300'; // Substitua pelo seu Account SID do Twilio
-const authToken = '2374de1dbcfc844afd76863668a16f76';   // Substitua pelo seu Auth Token do Twilio
-const client = twilio(accountSid, authToken);
+    const accountSid = 'EUA4ff172c85327c502f00fb3fc69fcc300'; // Substitua pelo seu Account SID do Twilio
+    const authToken = '2374de1dbcfc844afd76863668a16f76';   // Substitua pelo seu Auth Token do Twilio
+    const client = twilio(accountSid, authToken);
 
-async function enviarMensagemWhatsApp(phone, name, date, time, service) {
-    const mensagem = `Olá ${name}, sua consulta para o serviço ${service} está confirmada para ${date} às ${time}.`;
+    async function enviarMensagemWhatsApp(phone, name, date, time, service) {
+        const mensagem = `Olá ${name}, sua consulta para o serviço ${service} está confirmada para ${date} às ${time}.`;
 
-    try {
-        const message = await client.messages.create({
-            body: mensagem,
-            from: 'whatsapp:+17623095512', // Número do WhatsApp gerado pelo Twilio
-            to: `whatsapp:${phone}`
-        });
+        try {
+            const message = await client.messages.create({
+                body: mensagem,
+                from: 'whatsapp:+17623095512', // Número do WhatsApp gerado pelo Twilio
+                to: `whatsapp:${phone}`
+            });
 
-        console.log('Mensagem enviada com sucesso:', message.sid);
-    } catch (error) {
-        console.error('Erro ao enviar a mensagem:', error);
+            console.log('Mensagem enviada com sucesso:', message.sid);
+        } catch (error) {
+            console.error('Erro ao enviar a mensagem:', error);
+        }
     }
-}
 
 }
