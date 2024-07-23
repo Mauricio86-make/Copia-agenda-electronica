@@ -107,7 +107,7 @@ function addMinutes(time, minutes) {
 
 async function enviarMensagemWhatsApp(phone, name, date, time, service) {
     // Aquí debes implementar la lógica para enviar el mensaje de WhatsApp
-}
+
 
 const twilio = require('twilio');
 
@@ -129,4 +129,6 @@ async function enviarMensagemWhatsApp(phone, name, date, time, service) {
     } catch (error) {
         console.error('Erro ao enviar a mensagem:', error);
     }
+}
+
 }
