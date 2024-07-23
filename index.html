@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <title>Agendamento de Horários</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Agendamento de Serviços</h1>
+        <form id="bookingForm">
+            <label for="name">Nome:</label>
+            <input type="text" id="name" name="name" placeholder="Digite o Nome" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" placeholder="Digite o email" required>
+
+            <label for="phone">Telefone (WhatsApp):</label>
+            <input type="tel" id="phone" name="phone" placeholder="Digite o numero de Telefone" required>
+
+            <label for="service">Serviço:</label>
+            <select id="service" name="service" required>
+                <option value="esmalteGel">Esmaltação em Gel</option>
+                <option value="extensaoCilios">Extensão de Cílios</option>
+            </select>
+
+            <label for="duration">Duração (minutos):</label>
+            <select id="duration" name="duration" required>
+                <option value="60">60 minutos</option>
+                <option value="90">90 minutos</option>
+                <option value="120">120 minutos</option>
+            </select>
+
+            <label for="date">Data:</label>
+            <input type="date" id="date" name="date" required>
+
+            <label for="time">Horário:</label>
+            <input type="time" id="time" name="time" required>
+
+            <div id="errorMessage" class="error"></div>
+            <button type="submit">Agendar</button>
+        </form>
+        <div id="horariosDisponiveis">
+            <h2>Horários Disponíveis e Ocupados</h2>
+            <ul id="listaHorarios"></ul>
+        </div>
+        <div id="clientesAgendados">
+            <h2>Clientes Agendados</h2>
+            <ul id="listaClientes"></ul>
+        </div>
+    </div>
+</body>
+<script src="./script.js"></script>
+
+</html>
