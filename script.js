@@ -143,6 +143,16 @@ document.addEventListener('DOMContentLoaded', function () {
             clientSelect.appendChild(option);
         }
     }
+    
+    // JavaScript para mostrar/ocultar o formulário de adicionar cliente
+    document.getElementById('addClientToggle').addEventListener('click', function () {
+        const form = document.getElementById('addClientForm');
+        if (form.style.display === 'none' || form.style.display === '') {
+            form.style.display = 'block';
+        } else {
+            form.style.display = 'none';
+        }
+    });
 
     // Função para adicionar um novo cliente
     function addNewClient() {
